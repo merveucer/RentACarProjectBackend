@@ -52,7 +52,7 @@ namespace ConsoleUI
             }
 
             Console.WriteLine("---------  Adding Process Fail ---------");
-            carManager.Add(new Car { CarId = 6, BrandId = 1, ColorId = 1, DailyPrice = 0, Description = "ff", ModelYear = 2016 });
+            carManager.Add(new Car { CarId = 6, BrandId = 1, ColorId = 1, DailyPrice = 0, Description = "f", ModelYear = 2016 });
         }
     }
 }
