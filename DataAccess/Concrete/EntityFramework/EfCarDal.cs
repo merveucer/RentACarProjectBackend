@@ -1,5 +1,6 @@
 ﻿using DataAccess.Abstract;
 using Entities.Concrete;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,11 +13,10 @@ namespace DataAccess.Concrete.EntityFramework
     {
         public void Add(Car entity)
         {
-            // Hey garbage collector! Come here and discard me from memory. (:
             using (ReCapProjectDbContext context = new ReCapProjectDbContext())
             {
-                var addedEntity = context.Entry(entity); // Keep the reference.
-                addedEntity.State = Microsoft.EntityFrameworkCore.EntityState.Added;
+                var addedEntity = context.Entry(entity);
+                addedEntity.State = EntityState.Added;
                 context.SaveChanges();
             }
         }
@@ -26,7 +26,7 @@ namespace DataAccess.Concrete.EntityFramework
             using (ReCapProjectDbContext context = new ReCapProjectDbContext())
             {
                 var deletedEntity = context.Entry(entity);
-                deletedEntity.State = Microsoft.EntityFrameworkCore.EntityState.Deleted;
+                deletedEntity.State = EntityState.Deleted;
                 context.SaveChanges();
             }
         }
@@ -43,7 +43,6 @@ namespace DataAccess.Concrete.EntityFramework
         {
             using (ReCapProjectDbContext context = new ReCapProjectDbContext())
             {
-                // condition ? unfiltered : filtered
                 return filter == null ? context.Set<Car>().ToList() : context.Set<Car>().Where(filter).ToList();
             }
         }
@@ -53,7 +52,7 @@ namespace DataAccess.Concrete.EntityFramework
             using (ReCapProjectDbContext context = new ReCapProjectDbContext())
             {
                 var updatedEntity = context.Entry(entity);
-                updatedEntity.State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                updatedEntity.State = EntityState.Modified;
                 context.SaveChanges();
             }
         }

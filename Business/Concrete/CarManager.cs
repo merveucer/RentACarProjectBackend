@@ -33,6 +33,11 @@ namespace Business.Concrete
             _carDal.Delete(car);
         }
 
+        public Car GetCarById(int id)
+        {
+            return _carDal.Get(c=>c.CarId==id);
+        }
+
         public List<Car> GetAll()
         {
             return _carDal.GetAll();
@@ -40,17 +45,22 @@ namespace Business.Concrete
 
         public List<Car> GetCarsByBrandId(int id)
         {
-            return _carDal.GetAll(p=>p.BrandId==id);
+            return _carDal.GetAll(c=>c.BrandId==id);
         }
 
         public List<Car> GetCarsByColorId(int id)
         {
-            return _carDal.GetAll(p=>p.ColorId==id);
+            return _carDal.GetAll(c=>c.ColorId==id);
         }
 
         public void Update(Car car)
         {
             _carDal.Update(car);
+        }
+
+        public List<Car> GetCarsByDailyPrice(decimal min, decimal max)
+        {
+            return _carDal.GetAll(c => c.DailyPrice >= min && c.DailyPrice <= max);
         }
     }
 }
