@@ -16,5 +16,11 @@ namespace DataAccess.Concrete.EntityFramework
         public DbSet<Brand> Brands { get; set; }
         public DbSet<Car> Cars { get; set; }
         public DbSet<Color> Colors { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            //modelBuilder.Entity<Car>().ToTable("Cars", "dbo");
+            modelBuilder.Entity<Car>().Property(p => p.CarName).HasColumnName("Name");
+        }
     }
 }

@@ -40,14 +40,14 @@ namespace ConsoleUI
             }
 
             Console.WriteLine("--------- Add ---------");
-            carManager.Add(new Car { CarId = 6, BrandId = 1, ColorId = 1, DailyPrice = 600, Description = "fff", ModelYear = 2016 });
+            carManager.Add(new Car { CarId = 6, BrandId = 1, ColorId = 1, DailyPrice = 600, Description = "fff", ModelYear = 2016, CarName = "FF" });
             foreach (var car in carManager.GetAll())
             {
                 Console.WriteLine("Description: " + car.Description + " Model Year: " + car.ModelYear + " Daily Price: " + car.DailyPrice);
             }
 
             Console.WriteLine("--------- Update ---------");
-            carManager.Update(new Car { CarId = 6, BrandId = 1, ColorId = 1, DailyPrice = 600, Description = "fffffffff", ModelYear = 2016 });
+            carManager.Update(new Car { CarId = 6, BrandId = 1, ColorId = 1, DailyPrice = 600, Description = "fffffffff", ModelYear = 2016, CarName = "FF" });
             foreach (var car in carManager.GetAll())
             {
                 Console.WriteLine("Description: " + car.Description + " Model Year: " + car.ModelYear + " Daily Price: " + car.DailyPrice);
@@ -61,7 +61,7 @@ namespace ConsoleUI
             }
 
             Console.WriteLine("--------- Adding Process Fail ---------");
-            carManager.Add(new Car { CarId = 6, BrandId = 1, ColorId = 1, DailyPrice = 0, Description = "f", ModelYear = 2016 });
+            carManager.Add(new Car { CarId = 6, BrandId = 1, ColorId = 1, DailyPrice = 0, Description = "fff", ModelYear = 2016, CarName = "F" });
         }
     }
 }
