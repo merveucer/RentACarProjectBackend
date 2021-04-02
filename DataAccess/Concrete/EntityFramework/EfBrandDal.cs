@@ -12,7 +12,7 @@ namespace DataAccess.Concrete.EntityFramework
     {
         public void Add(Brand entity)
         {
-            using (ReCapProjectDbContext context = new ReCapProjectDbContext())
+            using (CarRentalProjectDbContext context = new CarRentalProjectDbContext())
             {
                 var addedEntity = context.Entry(entity);
                 addedEntity.State = Microsoft.EntityFrameworkCore.EntityState.Added;
@@ -22,7 +22,7 @@ namespace DataAccess.Concrete.EntityFramework
 
         public void Delete(Brand entity)
         {
-            using (ReCapProjectDbContext context = new ReCapProjectDbContext())
+            using (CarRentalProjectDbContext context = new CarRentalProjectDbContext())
             {
                 var deletedEntity = context.Entry(entity);
                 deletedEntity.State = Microsoft.EntityFrameworkCore.EntityState.Deleted;
@@ -32,7 +32,7 @@ namespace DataAccess.Concrete.EntityFramework
 
         public Brand Get(Expression<Func<Brand, bool>> filter)
         {
-            using (ReCapProjectDbContext context = new ReCapProjectDbContext())
+            using (CarRentalProjectDbContext context = new CarRentalProjectDbContext())
             {
                 return context.Set<Brand>().SingleOrDefault(filter);
             }
@@ -40,7 +40,7 @@ namespace DataAccess.Concrete.EntityFramework
 
         public List<Brand> GetAll(Expression<Func<Brand, bool>> filter = null)
         {
-            using (ReCapProjectDbContext context = new ReCapProjectDbContext())
+            using (CarRentalProjectDbContext context = new CarRentalProjectDbContext())
             {
                 return filter == null ? context.Set<Brand>().ToList() : context.Set<Brand>().Where(filter).ToList();
             }
@@ -48,7 +48,7 @@ namespace DataAccess.Concrete.EntityFramework
 
         public void Update(Brand entity)
         {
-            using (ReCapProjectDbContext context = new ReCapProjectDbContext())
+            using (CarRentalProjectDbContext context = new CarRentalProjectDbContext())
             {
                 var updatedEntity = context.Entry(entity);
                 updatedEntity.State = Microsoft.EntityFrameworkCore.EntityState.Modified;

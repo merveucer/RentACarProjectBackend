@@ -6,11 +6,11 @@ using System.Text;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-    public class ReCapProjectDbContext : DbContext
+    public class CarRentalProjectDbContext : DbContext
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=ReCapProjectDb;Trusted_Connection=true");
+            optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=CarRentalProjectDb;Trusted_Connection=true");
         }
 
         public DbSet<Brand> Brands { get; set; }
@@ -20,7 +20,7 @@ namespace DataAccess.Concrete.EntityFramework
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //modelBuilder.Entity<Car>().ToTable("Cars", "dbo");
-            modelBuilder.Entity<Car>().Property(p => p.CarName).HasColumnName("Name");
+            modelBuilder.Entity<Car>().Property(c => c.CarName).HasColumnName("Name");
         }
     }
 }
