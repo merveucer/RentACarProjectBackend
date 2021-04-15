@@ -14,6 +14,7 @@ namespace Business.Constants
         public static string CarUpdated = "Araba başarıyla güncellendi.";
         public static string CarDeleted = "Araba başarıyla silindi.";
         public static string CarAddingFailed = "Eklemek istediğiniz araba kriterlere uygun değildir.";
+        public static string CarListingFailed = "Kriterlere uygun araba bulunmamaktadır.";
 
         public static string ColorAdded = "Renk başarıyla eklendi.";
         public static string ColorUpdated = "Renk başarıyla güncellendi.";

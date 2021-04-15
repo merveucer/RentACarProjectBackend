@@ -11,7 +11,7 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-            //CarTest();
+            CarTest();
 
             //BrandTest();
 
@@ -21,7 +21,7 @@ namespace ConsoleUI
 
             //UserTest();
 
-            RentalTest();
+            //RentalTest();
         }
 
         private static void RentalTest()
@@ -238,9 +238,17 @@ namespace ConsoleUI
             CarManager carManager = new CarManager(new EfCarDal());
 
             Console.WriteLine("--------- GetAll ---------");
-            foreach (var car in carManager.GetAll().Data)
+            var resultGetAll = carManager.GetAll();
+            if (resultGetAll.Success)
             {
-                Console.WriteLine(car.CarName);
+                foreach (var car in carManager.GetAll().Data)
+                {
+                    Console.WriteLine(car.CarName);
+                }
+            }
+            else
+            {
+                Console.WriteLine(resultGetAll.Message);
             }
 
             Console.WriteLine("--------- GetById ---------");
@@ -259,24 +267,27 @@ namespace ConsoleUI
             }
 
             Console.WriteLine("--------- GetCarsByDailyPrice ---------");
-            var result = carManager.GetCarsByDailyPrice(100, 300);
-            if (result.Success)
+            var resultDailyPrice = carManager.GetCarsByDailyPrice(100, 300);
+            if (resultDailyPrice.Success)
             {
-                foreach (var car in result.Data)
+                foreach (var car in resultDailyPrice.Data)
                 {
                     Console.WriteLine(car.CarName);
                 }
             }
             else
             {
-                Console.WriteLine(result.Message);
+                Console.WriteLine(resultDailyPrice.Message);
             }
 
-            Console.WriteLine("--------- GetCarDetails ---------");
-            foreach (var car in carManager.GetCarDetails().Data)
+            Console.WriteLine("--------- GetDetailsOfCars ---------");
+            foreach (var car in carManager.GetDetailsOfCars().Data)
             {
                 Console.WriteLine("Car Name: " + car.CarName + " - Brand Name: " + car.BrandName + " - Color Name:" + car.ColorName + " - Daily Price: " + car.DailyPrice);
             }
+
+            Console.WriteLine("--------- GetCarDetails ---------");
+            Console.WriteLine("Car Name: " + carManager.GetCarDetails(1).Data.CarName + " - Brand Name: " + carManager.GetCarDetails(1).Data.BrandName + " - Color Name: " + carManager.GetCarDetails(1).Data.ColorName + " - Daily Price: " + carManager.GetCarDetails(1).Data.DailyPrice);
 
             Console.WriteLine("--------- Add ---------");
             var resultAdd = carManager.Add(new Car { CarId = 6, BrandId = 1, ColorId = 1, DailyPrice = 600, Description = "x", ModelYear = 2016, CarName = "Araba66" });

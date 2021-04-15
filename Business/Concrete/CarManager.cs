@@ -40,6 +40,11 @@ namespace Business.Concrete
 
         public IDataResult<List<Car>> GetAll()
         {
+            if (DateTime.Now.Hour == 03)
+            {
+                return new ErrorDataResult<List<Car>>(Messages.MaintenanceTime);
+            }
+
             return new SuccessDataResult<List<Car>>(_carDal.GetAll());
         }
 
@@ -48,9 +53,9 @@ namespace Business.Concrete
             return new SuccessDataResult<Car>(_carDal.Get(c => c.CarId == id));
         }
 
-        public IDataResult<List<CarDetailDto>> GetCarDetails()
+        public IDataResult<CarDetailDto> GetCarDetails(int id)
         {
-            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails());
+            return new SuccessDataResult<CarDetailDto>(_carDal.GetCarDetails(c => c.CarId == id));
         }
 
         public IDataResult<List<Car>> GetCarsByBrandId(int id)
@@ -65,13 +70,19 @@ namespace Business.Concrete
 
         public IDataResult<List<Car>> GetCarsByDailyPrice(decimal min, decimal max)
         {
-            if (DateTime.Now.Hour == 03)
+            var result = new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.DailyPrice >= min && c.DailyPrice <= max));
+
+            if (result.Data.Count == 0)
             {
-                return new ErrorDataResult<List<Car>>(Messages.MaintenanceTime);
+                return new ErrorDataResult<List<Car>>(Messages.CarListingFailed);
             }
 
-            return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.DailyPrice >= min && c.DailyPrice <= max));
+            return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.DailyPrice >= min && c.DailyPrice <= max));            
+        }
 
+        public IDataResult<List<CarDetailDto>> GetDetailsOfCars()
+        {
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetDetailsOfCars());
         }
 
         public IResult Update(Car car)
