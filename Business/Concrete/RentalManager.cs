@@ -20,16 +20,26 @@ namespace Business.Concrete
 
         public IResult Add(Rental rental)
         {
-            if (CheckIfRentable(rental.CarId).Success)
-            {
-                _rentalDal.Add(rental);
-
-                return new SuccessResult(Messages.RentalAdded);
-            }
-            else
+            if (CheckIfRentable(rental.CarId).Success == false)
             {
                 return new ErrorResult(Messages.RentalAddingFailed);
             }
+
+            _rentalDal.Add(rental);
+
+            return new SuccessResult(Messages.RentalAdded);
+        }
+
+        public IResult CheckIfRentable(int carId)
+        {
+            var checkedRental = _rentalDal.Get(r => r.CarId == carId && r.ReturnDate == null);
+
+            if (checkedRental != null)
+            {
+                return new ErrorResult();
+            }
+
+            return new SuccessResult();
         }
 
         public IResult Delete(Rental rental)
@@ -46,7 +56,7 @@ namespace Business.Concrete
 
         public IDataResult<Rental> GetById(int id)
         {
-            return new SuccessDataResult<Rental>(_rentalDal.Get(c => c.RentalId == id));
+            return new SuccessDataResult<Rental>(_rentalDal.Get(r => r.RentalId == id));
         }
 
         public IResult Update(Rental rental)
@@ -54,20 +64,6 @@ namespace Business.Concrete
             _rentalDal.Update(rental);
 
             return new SuccessResult(Messages.RentalUpdated);
-        }
-
-        public IResult CheckIfRentable(int carId)
-        {
-            var checkedRental = _rentalDal.Get(r => r.CarId == carId && r.ReturnDate == null);
-
-            if (checkedRental != null)
-            {
-                return new ErrorResult();
-            }
-            else
-            {
-                return new SuccessResult();
-            }
         }
     }
 }

@@ -25,12 +25,10 @@ namespace Business.Concrete
             {
                 return new ErrorResult(Messages.CarAddingFailed);
             }
-            else
-            {
-                _carDal.Add(car);
 
-                return new SuccessResult(Messages.CarAdded);
-            }
+            _carDal.Add(car);
+
+            return new SuccessResult(Messages.CarAdded);
         }
 
         public IResult Delete(Car car)
@@ -71,10 +69,9 @@ namespace Business.Concrete
             {
                 return new ErrorDataResult<List<Car>>(Messages.MaintenanceTime);
             }
-            else
-            {
-                return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.DailyPrice >= min && c.DailyPrice <= max));
-            }
+
+            return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.DailyPrice >= min && c.DailyPrice <= max));
+
         }
 
         public IResult Update(Car car)
