@@ -12,6 +12,44 @@ namespace ConsoleUI
         {
             CarTest();
             BrandTest();
+            ColorTest();
+        }
+
+        private static void ColorTest()
+        {
+            ColorManager colorManager = new ColorManager(new EfColorDal());
+            Color color = new Color { Id = 4, Name = "Renk 4" };
+
+            Console.WriteLine("--- GetAll ---");
+            foreach (Color c in colorManager.GetAll())
+            {
+                Console.WriteLine(c.Id + " " + c.Name);
+            }
+
+            Console.WriteLine("--- GetById ---");
+            Console.WriteLine(colorManager.GetById(1).Id + " " + colorManager.GetById(1).Name);
+
+            Console.WriteLine("--- Add ---");
+            colorManager.Add(color);
+            foreach (Color c in colorManager.GetAll())
+            {
+                Console.WriteLine(c.Id + " " + c.Name);
+            }
+
+            Console.WriteLine("--- Update ---");
+            color.Name = "Renk 5";
+            colorManager.Update(color);
+            foreach (Color c in colorManager.GetAll())
+            {
+                Console.WriteLine(c.Id + " " + c.Name);
+            }
+
+            Console.WriteLine("--- Delete ---");
+            colorManager.Delete(color);
+            foreach (Color c in colorManager.GetAll())
+            {
+                Console.WriteLine(c.Id + " " + c.Name);
+            }
         }
 
         private static void BrandTest()
