@@ -18,7 +18,14 @@ namespace Business.Concrete
 
         public void Add(Car car)
         {
-            _carDal.Add(car);
+            if (car.Name.Length < 2 || car.DailyPrice <= 0)
+            {
+                Console.WriteLine("Eklemek istediğiniz araba kriterlere uygun değildir.");
+            }
+            else
+            {
+                _carDal.Add(car);
+            }
         }
 
         public void Delete(Car car)

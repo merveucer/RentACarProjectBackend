@@ -16,7 +16,7 @@ namespace ConsoleUI
         private static void CarTest()
         {
             CarManager carManager = new CarManager(new EfCarDal());
-            Car car = new Car { Id = 6, BrandId = 3, ColorId = 3, DailyPrice = 600, Description = "", ModelYear = 2022 };
+            Car car = new Car { Id = 6, BrandId = 3, ColorId = 3, DailyPrice = 600, Description = "", Name="C 666", ModelYear = 2022 };
 
             Console.WriteLine("--- GetAll ---");
             foreach (Car c in carManager.GetAll())
@@ -60,6 +60,9 @@ namespace ConsoleUI
             {
                 Console.WriteLine(c.Id + " " + c.DailyPrice);
             }
+
+            Console.WriteLine("--- Failed Add Operation ---");
+            carManager.Add(new Car { Id = 6, BrandId = 3, ColorId = 3, DailyPrice = 600, Description = "", Name = "C", ModelYear = 2022 });
         }
     }
 }
