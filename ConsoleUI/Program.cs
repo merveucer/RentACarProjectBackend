@@ -1,4 +1,5 @@
 ﻿using Business.Concrete;
+using DataAccess.Concrete.EntityFramework;
 using DataAccess.Concrete.InMemory;
 using Entities.Concrete;
 using System;
@@ -14,7 +15,7 @@ namespace ConsoleUI
 
         private static void CarTest()
         {
-            CarManager carManager = new CarManager(new InMemoryCarDal());
+            CarManager carManager = new CarManager(new EfCarDal());
             Car car = new Car { Id = 6, BrandId = 3, ColorId = 3, DailyPrice = 600, Description = "", ModelYear = 2022 };
 
             Console.WriteLine("--- GetAll ---");
