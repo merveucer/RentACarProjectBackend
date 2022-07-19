@@ -11,9 +11,47 @@ namespace ConsoleUI
         static void Main(string[] args)
         {
             CarTest();
+            BrandTest();
         }
 
-        private static void CarTest()
+        private static void BrandTest()
+        {
+            BrandManager brandManager = new BrandManager(new EfBrandDal());
+            Brand brand = new Brand { Id = 4, Name = "Marka 4" };
+
+            Console.WriteLine("--- GetAll ---");
+            foreach (Brand b in brandManager.GetAll())
+            {
+                Console.WriteLine(b.Id + " " + b.Name);
+            }
+
+            Console.WriteLine("--- GetById ---");
+            Console.WriteLine(brandManager.GetById(1).Id + " " + brandManager.GetById(1).Name);
+
+            Console.WriteLine("--- Add ---");
+            brandManager.Add(brand);
+            foreach (Brand b in brandManager.GetAll())
+            {
+                Console.WriteLine(b.Id + " " + b.Name);
+            }
+
+            Console.WriteLine("--- Update ---");
+            brand.Name = "Marka 5";
+            brandManager.Update(brand);
+            foreach (Brand b in brandManager.GetAll())
+            {
+                Console.WriteLine(b.Id + " " + b.Name);
+            }
+
+            Console.WriteLine("--- Delete ---");
+            brandManager.Delete(brand);
+            foreach (Brand b in brandManager.GetAll())
+            {
+                Console.WriteLine(b.Id + " " + b.Name);
+            }
+        }
+
+            private static void CarTest()
         {
             CarManager carManager = new CarManager(new EfCarDal());
             Car car = new Car { Id = 6, BrandId = 3, ColorId = 3, DailyPrice = 600, Description = "", Name="C 666", ModelYear = 2022 };
