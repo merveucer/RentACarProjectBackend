@@ -21,38 +21,35 @@ namespace ConsoleUI
             Console.WriteLine("--- COLOR ---");
 
             ColorManager colorManager = new ColorManager(new EfColorDal());
-            Color color = new Color { Id = 4, Name = "Renk 4" };
+            Color color = new Color { Id=4, Name="Renk 4" };
+
+            void GetAll()
+            {
+                foreach (Color color in colorManager.GetAll().Data)
+                {
+                    Console.WriteLine(color.Id + " " + color.Name);
+                }
+            }
 
             Console.WriteLine("--- GetAll ---");
-            foreach (Color c in colorManager.GetAll())
-            {
-                Console.WriteLine(c.Id + " " + c.Name);
-            }
+            GetAll();
 
             Console.WriteLine("--- GetById ---");
-            Console.WriteLine(colorManager.GetById(1).Id + " " + colorManager.GetById(1).Name);
+            var result = colorManager.GetById(1).Data;
+            Console.WriteLine(result.Id + " " + result.Name);
 
             Console.WriteLine("--- Add ---");
-            colorManager.Add(color);
-            foreach (Color c in colorManager.GetAll())
-            {
-                Console.WriteLine(c.Id + " " + c.Name);
-            }
+            Console.WriteLine(colorManager.Add(color).Message);
+            GetAll();
 
             Console.WriteLine("--- Update ---");
             color.Name = "Renk 5";
-            colorManager.Update(color);
-            foreach (Color c in colorManager.GetAll())
-            {
-                Console.WriteLine(c.Id + " " + c.Name);
-            }
+            Console.WriteLine(colorManager.Update(color).Message);
+            GetAll();
 
             Console.WriteLine("--- Delete ---");
-            colorManager.Delete(color);
-            foreach (Color c in colorManager.GetAll())
-            {
-                Console.WriteLine(c.Id + " " + c.Name);
-            }
+            Console.WriteLine(colorManager.Delete(color).Message);
+            GetAll();
         }
 
         private static void BrandTest()
@@ -60,38 +57,35 @@ namespace ConsoleUI
             Console.WriteLine("--- BRAND ---");
 
             BrandManager brandManager = new BrandManager(new EfBrandDal());
-            Brand brand = new Brand { Id = 4, Name = "Marka 4" };
+            Brand brand = new Brand { Id=4, Name ="Marka 4" };
+
+            void GetAll()
+            {
+                foreach (Brand brand in brandManager.GetAll().Data)
+                {
+                    Console.WriteLine(brand.Id + " " + brand.Name);
+                }
+            }
 
             Console.WriteLine("--- GetAll ---");
-            foreach (Brand b in brandManager.GetAll())
-            {
-                Console.WriteLine(b.Id + " " + b.Name);
-            }
+            GetAll();
 
             Console.WriteLine("--- GetById ---");
-            Console.WriteLine(brandManager.GetById(1).Id + " " + brandManager.GetById(1).Name);
+            var result = brandManager.GetById(1).Data;
+            Console.WriteLine(result.Id + " " + result.Name);
 
             Console.WriteLine("--- Add ---");
-            brandManager.Add(brand);
-            foreach (Brand b in brandManager.GetAll())
-            {
-                Console.WriteLine(b.Id + " " + b.Name);
-            }
+            Console.WriteLine(brandManager.Add(brand).Message);
+            GetAll();
 
             Console.WriteLine("--- Update ---");
             brand.Name = "Marka 5";
-            brandManager.Update(brand);
-            foreach (Brand b in brandManager.GetAll())
-            {
-                Console.WriteLine(b.Id + " " + b.Name);
-            }
+            Console.WriteLine(brandManager.Update(brand).Message);
+            GetAll();
 
             Console.WriteLine("--- Delete ---");
-            brandManager.Delete(brand);
-            foreach (Brand b in brandManager.GetAll())
-            {
-                Console.WriteLine(b.Id + " " + b.Name);
-            }
+            Console.WriteLine(brandManager.Delete(brand).Message);
+            GetAll();
         }
 
         private static void CarTest()
@@ -99,64 +93,60 @@ namespace ConsoleUI
             Console.WriteLine("--- CAR ---");
 
             CarManager carManager = new CarManager(new EfCarDal());
-            Car car = new Car { Id = 6, BrandId = 3, ColorId = 3, DailyPrice = 600, Description = "", Name="C 666", ModelYear = 2022 };
+            Car car = new Car { Id=6, BrandId=3, ColorId=3, DailyPrice=600, Description="", Name="C 666", ModelYear=2022 };
 
-            Console.WriteLine("--- GetAll ---");
-            foreach (Car c in carManager.GetAll())
+            void GetAll()
             {
-                Console.WriteLine(c.Id + " " + c.DailyPrice);
+                foreach (Car car in carManager.GetAll().Data)
+                {
+                    Console.WriteLine(car.Id + " " + car.DailyPrice);
+                }
             }
+            
+            Console.WriteLine("--- GetAll ---");
+            GetAll();
 
             Console.WriteLine("--- GetAllByBrandId ---");
-            foreach (Car c in carManager.GetAllByBrandId(1))
+            foreach (Car c in carManager.GetAllByBrandId(1).Data)
             {
                 Console.WriteLine(c.Id + " " + c.DailyPrice);
             }
 
             Console.WriteLine("--- GetAllByColorId ---");
-            foreach (Car c in carManager.GetAllByColorId(1))
+            foreach (Car c in carManager.GetAllByColorId(1).Data)
             {
                 Console.WriteLine(c.Id + " " + c.DailyPrice);
             }
 
             Console.WriteLine("--- GetAllWithCarDetails ---");
-            foreach (CarDetailDto c in carManager.GetAllWithCarDetails())
+            foreach (CarDetailDto c in carManager.GetAllWithCarDetails().Data)
             {
                 Console.WriteLine(c.Id + " " + c.BrandName + " " + c.ColorName);
             }
 
             Console.WriteLine("--- GetById ---");
-            var result1 = carManager.GetById(1);
+            var result1 = carManager.GetById(1).Data;
             Console.WriteLine(result1.Id + " " + result1.DailyPrice);
 
             Console.WriteLine("--- GetWithCarDetailsById ---");
-            var result2 = carManager.GetWithCarDetailsById(1);
+            var result2 = carManager.GetWithCarDetailsById(1).Data;
             Console.WriteLine(result2.Id + " " + result2.BrandName + " " + result2.ColorName);
 
             Console.WriteLine("--- Add ---");
-            carManager.Add(car);
-            foreach (Car c in carManager.GetAll())
-            {
-                Console.WriteLine(c.Id + " " + c.DailyPrice);
-            }
+            Console.WriteLine(carManager.Add(car).Message);
+            GetAll();
 
             Console.WriteLine("--- Update ---");
             car.DailyPrice = 700;
-            carManager.Update(car);
-            foreach (Car c in carManager.GetAll())
-            {
-                Console.WriteLine(c.Id + " " + c.DailyPrice);
-            }
+            Console.WriteLine(carManager.Update(car).Message);
+            GetAll();
 
             Console.WriteLine("--- Delete ---");
-            carManager.Delete(car);
-            foreach (Car c in carManager.GetAll())
-            {
-                Console.WriteLine(c.Id + " " + c.DailyPrice);
-            }
+            Console.WriteLine(carManager.Delete(car).Message);
+            GetAll();
 
             Console.WriteLine("--- Failed Add Operation ---");
-            carManager.Add(new Car { Id = 6, BrandId = 3, ColorId = 3, DailyPrice = 600, Description = "", Name = "C", ModelYear = 2022 });
+            Console.WriteLine(carManager.Add(new Car { Id = 6, BrandId = 3, ColorId = 3, DailyPrice = 600, Description = "", Name = "C", ModelYear = 2022 }).Message);
         }
     }
 }
