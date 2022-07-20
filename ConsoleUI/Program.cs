@@ -17,6 +17,8 @@ namespace ConsoleUI
 
         private static void ColorTest()
         {
+            Console.WriteLine("--- COLOR ---");
+
             ColorManager colorManager = new ColorManager(new EfColorDal());
             Color color = new Color { Id = 4, Name = "Renk 4" };
 
@@ -54,6 +56,8 @@ namespace ConsoleUI
 
         private static void BrandTest()
         {
+            Console.WriteLine("--- BRAND ---");
+
             BrandManager brandManager = new BrandManager(new EfBrandDal());
             Brand brand = new Brand { Id = 4, Name = "Marka 4" };
 
@@ -89,8 +93,10 @@ namespace ConsoleUI
             }
         }
 
-            private static void CarTest()
+        private static void CarTest()
         {
+            Console.WriteLine("--- CAR ---");
+
             CarManager carManager = new CarManager(new EfCarDal());
             Car car = new Car { Id = 6, BrandId = 3, ColorId = 3, DailyPrice = 600, Description = "", Name="C 666", ModelYear = 2022 };
 
