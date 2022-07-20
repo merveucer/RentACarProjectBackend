@@ -2,6 +2,7 @@
 using DataAccess.Concrete.EntityFramework;
 using DataAccess.Concrete.InMemory;
 using Entities.Concrete;
+using Entities.DTOs;
 using System;
 
 namespace ConsoleUI
@@ -118,8 +119,19 @@ namespace ConsoleUI
                 Console.WriteLine(c.Id + " " + c.DailyPrice);
             }
 
+            Console.WriteLine("--- GetAllWithCarDetails ---");
+            foreach (CarDetailDto c in carManager.GetAllWithCarDetails())
+            {
+                Console.WriteLine(c.Id + " " + c.BrandName + " " + c.ColorName);
+            }
+
             Console.WriteLine("--- GetById ---");
-            Console.WriteLine(carManager.GetById(1).Id + " " + carManager.GetById(1).DailyPrice);
+            var result1 = carManager.GetById(1);
+            Console.WriteLine(result1.Id + " " + result1.DailyPrice);
+
+            Console.WriteLine("--- GetWithCarDetailsById ---");
+            var result2 = carManager.GetWithCarDetailsById(1);
+            Console.WriteLine(result2.Id + " " + result2.BrandName + " " + result2.ColorName);
 
             Console.WriteLine("--- Add ---");
             carManager.Add(car);
