@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.Constants;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -26,13 +27,13 @@ namespace Business.Concrete
             }            
 
             _carDal.Add(entity);
-            return new SuccessResult("Araba eklendi.");
+            return new SuccessResult(Messages.CarAdded);
         }
 
         public IResult Delete(Car entity)
         {
             _carDal.Delete(entity);
-            return new SuccessResult("Araba silindi.");
+            return new SuccessResult(Messages.CarDeleted);
         }
 
         public IResult Update(Car entity)
@@ -43,7 +44,7 @@ namespace Business.Concrete
             }
 
             _carDal.Update(entity);
-            return new SuccessResult("Araba güncellendi.");
+            return new SuccessResult(Messages.CarUpdated);
         }
 
         public IDataResult<List<Car>> GetAll()
@@ -104,12 +105,12 @@ namespace Business.Concrete
         {
             if (!CheckIfNameLengthIsMinTwoChars(car.Name))
             {
-                return new ErrorResult("Araba adı en az iki karakter uzunluğunda olmalıdır.");
+                return new ErrorResult(Messages.CarNameInvalid);
             }
 
             if (!CheckIfDailyPriceIsGreaterThanZero(car.DailyPrice))
             {
-                return new ErrorResult("Günlük fiyat sıfırdan farklı olmalıdır.");
+                return new ErrorResult(Messages.CarDailyPriceInvalid);
             }
 
             return null;
