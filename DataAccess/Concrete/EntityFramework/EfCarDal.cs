@@ -13,7 +13,7 @@ namespace DataAccess.Concrete.EntityFramework
 {
     public class EfCarDal : EfEntityRepositoryBase<Car, RentACarContext>, ICarDal
     {
-        private List<CarDetailDto> JoinCar ()
+        private List<CarDetailDto> JoinCar()
         {
             using (RentACarContext context = new RentACarContext())
             {
@@ -36,7 +36,7 @@ namespace DataAccess.Concrete.EntityFramework
                 return result.ToList();
             }
         }
-        
+
         public List<CarDetailDto> GetAllWithCarDetails(Expression<Func<CarDetailDto, bool>> filter = null)
         {
             return JoinCar();

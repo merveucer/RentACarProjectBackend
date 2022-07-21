@@ -17,21 +17,21 @@ namespace Business.Concrete
             _colorDal = colorDal;
         }
 
-        public IResult Add(Color color)
+        public IResult Add(Color entity)
         {
-            _colorDal.Add(color);
+            _colorDal.Add(entity);
             return new SuccessResult("Renk eklendi.");
         }
 
-        public IResult Delete(Color color)
+        public IResult Delete(Color entity)
         {
-            _colorDal.Delete(color);
+            _colorDal.Delete(entity);
             return new SuccessResult("Renk silindi.");
         }
 
-        public IResult Update(Color color)
+        public IResult Update(Color entity)
         {
-            _colorDal.Update(color);
+            _colorDal.Update(entity);
             return new SuccessResult("Renk güncellendi.");
         }
 

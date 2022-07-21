@@ -17,21 +17,21 @@ namespace Business.Concrete
             _brandDal = brandDal;
         }
 
-        public IResult Add(Brand brand)
+        public IResult Add(Brand entity)
         {
-            _brandDal.Add(brand);
+            _brandDal.Add(entity);
             return new SuccessResult("Marka eklendi.");
         }
 
-        public IResult Delete(Brand brand)
+        public IResult Delete(Brand entity)
         {
-            _brandDal.Delete(brand);
+            _brandDal.Delete(entity);
             return new SuccessResult("Marka silindi.");
         }
 
-        public IResult Update(Brand brand)
+        public IResult Update(Brand entity)
         {
-            _brandDal.Update(brand);
+            _brandDal.Update(entity);
             return new SuccessResult("Marka güncellendi.");
         }
 

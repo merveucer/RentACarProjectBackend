@@ -136,17 +136,25 @@ namespace ConsoleUI
             Console.WriteLine(carManager.Add(car).Message);
             GetAll();
 
+            Console.WriteLine("--- Failed Add Operation ---");
+            Console.WriteLine(carManager.Add(new Car { Id = 7, BrandId = 1, ColorId = 1, DailyPrice = 700, Description = "", Name = "C", ModelYear = 2022 }).Message);
+            Console.WriteLine(carManager.Add(new Car { Id = 8, BrandId = 2, ColorId = 2, DailyPrice = 0, Description = "", Name = "C 888", ModelYear = 2022 }).Message);
+
             Console.WriteLine("--- Update ---");
-            car.DailyPrice = 700;
+            car.DailyPrice = 1000;
             Console.WriteLine(carManager.Update(car).Message);
             GetAll();
+
+            Console.WriteLine("--- Failed Update Operation ---");
+            car.Name = "C";
+            Console.WriteLine(carManager.Update(car).Message);
+            car.Name = "C 666";
+            car.DailyPrice = 0;
+            Console.WriteLine(carManager.Update(car).Message);
 
             Console.WriteLine("--- Delete ---");
             Console.WriteLine(carManager.Delete(car).Message);
             GetAll();
-
-            Console.WriteLine("--- Failed Add Operation ---");
-            Console.WriteLine(carManager.Add(new Car { Id = 6, BrandId = 3, ColorId = 3, DailyPrice = 600, Description = "", Name = "C", ModelYear = 2022 }).Message);
         }
     }
 }

@@ -33,6 +33,7 @@ namespace DataAccess.Concrete.InMemory
         public void Delete(Car car)
         {
             Car carToDelete = _cars.SingleOrDefault(c => c.Id == car.Id);
+
             _cars.Remove(carToDelete);
         }
 
@@ -44,6 +45,7 @@ namespace DataAccess.Concrete.InMemory
             carToUpdate.ColorId = car.ColorId;
             carToUpdate.DailyPrice = car.DailyPrice;
             carToUpdate.Description = car.Description;
+            carToUpdate.Name = car.Name;
             carToUpdate.ModelYear = car.ModelYear;
         }
 

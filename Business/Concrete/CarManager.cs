@@ -18,28 +18,31 @@ namespace Business.Concrete
             _carDal = carDal;
         }
 
-        public IResult Add(Car car)
+        public IResult Add(Car entity)
         {
-            if (car.Name.Length < 2 || car.DailyPrice <= 0)
+            if (validateCar(entity) != null)
             {
-                return new ErrorResult("Eklemek istediğiniz araba kriterlere uygun değildir.");
-            }
-            else
-            {
-                _carDal.Add(car);
-                return new SuccessResult("Araba eklendi.");
-            }
+                return validateCar(entity);
+            }            
+
+            _carDal.Add(entity);
+            return new SuccessResult("Araba eklendi.");
         }
 
-        public IResult Delete(Car car)
+        public IResult Delete(Car entity)
         {
-            _carDal.Delete(car);
+            _carDal.Delete(entity);
             return new SuccessResult("Araba silindi.");
         }
 
-        public IResult Update(Car car)
+        public IResult Update(Car entity)
         {
-            _carDal.Update(car);
+            if (validateCar(entity) != null)
+            {
+                return validateCar(entity);
+            }
+
+            _carDal.Update(entity);
             return new SuccessResult("Araba güncellendi.");
         }
 
@@ -71,6 +74,45 @@ namespace Business.Concrete
         public IDataResult<CarDetailDto> GetWithCarDetailsById(int id)
         {
             return new SuccessDataResult<CarDetailDto>(_carDal.GetWithCarDetails(c => c.Id == id));
+        }
+
+        private bool CheckIfNameLengthIsMinTwoChars(String name)
+        {
+            bool result = false;
+
+            if (name.Length >= 2)
+            {
+                result = true;
+            }
+
+            return result;
+        }
+
+        private bool CheckIfDailyPriceIsGreaterThanZero(decimal dailyPrice)
+        {
+            bool result = false;
+
+            if (dailyPrice > 0)
+            {
+                result = true;
+            }
+
+            return result;
+        }
+
+        private IResult validateCar(Car car)
+        {
+            if (!CheckIfNameLengthIsMinTwoChars(car.Name))
+            {
+                return new ErrorResult("Araba adı en az iki karakter uzunluğunda olmalıdır.");
+            }
+
+            if (!CheckIfDailyPriceIsGreaterThanZero(car.DailyPrice))
+            {
+                return new ErrorResult("Günlük fiyat sıfırdan farklı olmalıdır.");
+            }
+
+            return null;
         }
     }
 }
