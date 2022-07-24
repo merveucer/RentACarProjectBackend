@@ -37,7 +37,7 @@ namespace Business.Concrete
 
         public IResult Update(Rental entity)
         {
-            if (ValidateRental(entity) != null)
+            if (ValidateRental(entity) != null && entity.CarId != GetById(entity.Id).Data.CarId)
             {
                 return ValidateRental(entity);
             }

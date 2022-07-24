@@ -46,7 +46,7 @@ namespace ConsoleUI
             GetAll();
 
             Console.WriteLine("--- Update ---");
-            user.FirstName = "Ffff";
+            user.FirstName = "Fff";
             Console.WriteLine(userManager.Update(user).Message);
             GetAll();
 
@@ -96,7 +96,7 @@ namespace ConsoleUI
             Console.WriteLine("--- RENTAL ---");
 
             RentalManager rentalManager = new RentalManager(new EfRentalDal());
-            Rental rental = new Rental { Id = 6, CarId = 1, CustomerId = 3, RentDate = DateTime.Now, ReturnDate = null };
+            Rental rental = new Rental { Id = 6, CarId = 1, CustomerId = 3, RentDate = DateTime.Now, ReturnDate = DateTime.Now };
 
             void GetAll()
             {
