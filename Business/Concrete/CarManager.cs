@@ -21,9 +21,9 @@ namespace Business.Concrete
 
         public IResult Add(Car entity)
         {
-            if (validateCar(entity) != null)
+            if (ValidateCar(entity) != null)
             {
-                return validateCar(entity);
+                return ValidateCar(entity);
             }            
 
             _carDal.Add(entity);
@@ -38,9 +38,9 @@ namespace Business.Concrete
 
         public IResult Update(Car entity)
         {
-            if (validateCar(entity) != null)
+            if (ValidateCar(entity) != null)
             {
-                return validateCar(entity);
+                return ValidateCar(entity);
             }
 
             _carDal.Update(entity);
@@ -101,7 +101,7 @@ namespace Business.Concrete
             return result;
         }
 
-        private IResult validateCar(Car car)
+        private IResult ValidateCar(Car car)
         {
             if (!CheckIfNameLengthIsMinTwoChars(car.Name))
             {
