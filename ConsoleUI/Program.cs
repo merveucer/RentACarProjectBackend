@@ -14,6 +14,124 @@ namespace ConsoleUI
             CarTest();
             BrandTest();
             ColorTest();
+            UserTest();
+            CustomerTest();
+            RentalTest();
+        }
+
+        private static void UserTest()
+        {
+            Console.WriteLine("--- USER ---");
+
+            UserManager userManager = new UserManager(new EfUserDal());
+            User user = new User { Id = 5, Email = "e@e.com", FirstName = "Eee", LastName = "Eee", Password = "555" };
+
+            void GetAll()
+            {
+                foreach (User user in userManager.GetAll().Data)
+                {
+                    Console.WriteLine(user.Id + " " + user.FirstName + " " + user.LastName);
+                }
+            }
+
+            Console.WriteLine("--- GetAll ---");
+            GetAll();
+
+            Console.WriteLine("--- GetById ---");
+            var result = userManager.GetById(1).Data;
+            Console.WriteLine(result.Id + " " + result.FirstName + " " + result.LastName);
+
+            Console.WriteLine("--- Add ---");
+            Console.WriteLine(userManager.Add(user).Message);
+            GetAll();
+
+            Console.WriteLine("--- Update ---");
+            user.FirstName = "Ffff";
+            Console.WriteLine(userManager.Update(user).Message);
+            GetAll();
+
+            Console.WriteLine("--- Delete ---");
+            Console.WriteLine(userManager.Delete(user).Message);
+            GetAll();
+        }
+
+        private static void CustomerTest()
+        {
+            Console.WriteLine("--- CUSTOMER ---");
+
+            CustomerManager customerManager = new CustomerManager(new EfCustomerDal());
+            Customer customer = new Customer { Id = 4, UserId = 4, CompanyName = "D" };
+
+            void GetAll()
+            {
+                foreach (Customer customer in customerManager.GetAll().Data)
+                {
+                    Console.WriteLine(customer.Id + " " + customer.CompanyName);
+                }
+            }
+
+            Console.WriteLine("--- GetAll ---");
+            GetAll();
+
+            Console.WriteLine("--- GetById ---");
+            var result = customerManager.GetById(1).Data;
+            Console.WriteLine(result.Id + " " + result.CompanyName);
+
+            Console.WriteLine("--- Add ---");
+            Console.WriteLine(customerManager.Add(customer).Message);
+            GetAll();
+
+            Console.WriteLine("--- Update ---");
+            customer.CompanyName = "E";
+            Console.WriteLine(customerManager.Update(customer).Message);
+            GetAll();
+
+            Console.WriteLine("--- Delete ---");
+            Console.WriteLine(customerManager.Delete(customer).Message);
+            GetAll();
+        }
+
+        private static void RentalTest()
+        {
+            Console.WriteLine("--- RENTAL ---");
+
+            RentalManager rentalManager = new RentalManager(new EfRentalDal());
+            Rental rental = new Rental { Id = 6, CarId = 1, CustomerId = 3, RentDate = DateTime.Now, ReturnDate = null };
+
+            void GetAll()
+            {
+                foreach (Rental rental in rentalManager.GetAll().Data)
+                {
+                    Console.WriteLine(rental.Id + " " + rental.CarId);
+                }
+            }
+
+            Console.WriteLine("--- GetAll ---");
+            GetAll();
+
+            Console.WriteLine("--- GetById ---");
+            var result = rentalManager.GetById(1).Data;
+            Console.WriteLine(result.Id + " " + result.CarId);
+
+            Console.WriteLine("--- Add ---");
+            Console.WriteLine(rentalManager.Add(rental).Message);
+            GetAll();
+
+            Console.WriteLine("--- Failed Add Operation ---");
+            Console.WriteLine(rentalManager.Add(new Rental { Id = 7, CarId = 4, CustomerId = 3, RentDate = DateTime.Now, ReturnDate = DateTime.Now }).Message);
+
+            Console.WriteLine("--- Update ---");
+            rental.CarId = 2;
+            Console.WriteLine(rentalManager.Update(rental).Message);
+            GetAll();
+
+            Console.WriteLine("--- Failed Update Operation ---");
+            rental.CarId = 5;
+            Console.WriteLine(rentalManager.Update(rental).Message);
+
+            Console.WriteLine("--- Delete ---");
+            Console.WriteLine(rentalManager.Delete(rental).Message);
+            GetAll();
         }
 
         private static void ColorTest()
